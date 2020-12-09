@@ -12,6 +12,7 @@ cmake .. \
     -DCMAKE_BUILD_TYPE=$CONFIGURATION \
     -DWITH_INTERCONNECT=OFF \
     -DBUILD_DEPRECATED=$BUILD_DEPRECATED \
+    -DBUILD_STATIC=$BUILD_STATIC \
     -G Ninja
 ninja install
 cd ../..
@@ -41,7 +42,16 @@ cmake .. \
     -DWITH_WINDOWLESS${PLATFORM_GL_API}APPLICATION=ON \
     -DWITH_SDL2APPLICATION=ON \
     -DBUILD_DEPRECATED=$BUILD_DEPRECATED \
+    -DBUILD_STATIC=$BUILD_STATIC \
     -G Ninja
+
+# For DartIntegration we need plugins, in case of a static build there's no
+# way for the test to know the plugin install directory so we have to hardcode
+# it
+if [ "$WITH_DART" == "ON" ] && [ "$BUILD_STATIC" == "ON" ]; then
+    cmake . -DMAGNUM_PLUGINS_DEBUG_DIR=$HOME/deps/lib/magnum-d
+fi
+
 ninja install
 cd ../..
 
@@ -79,6 +89,7 @@ cmake .. \
     -DWITH_OVR=OFF \
     -DBUILD_TESTS=ON \
     -DBUILD_GL_TESTS=ON \
+    -DBUILD_STATIC=$BUILD_STATIC \
     -G Ninja
 # Otherwise the job gets killed (probably because using too much memory)
 ninja -j4
