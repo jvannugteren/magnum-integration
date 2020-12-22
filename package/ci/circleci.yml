@@ -388,13 +388,13 @@ workflows:
   version: 2
   build:
     jobs:
-    - linux-gl
-    - linux-gles2
-    - linux-gles3
+    #- linux-gl
+    #- linux-gles2
+    #- linux-gles3
     - linux-static
-    - linux-nondeprecated
-    - linux-sanitizers
-    - macos-gl
+    #- linux-nondeprecated
+    #- linux-sanitizers
+    #- macos-gl
     - macos-static
-    - emscripten-webgl1
-    - emscripten-webgl2
+    #- emscripten-webgl1
+    #- emscripten-webgl2

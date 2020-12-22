@@ -55,7 +55,12 @@ fi
 ninja install
 cd ../..
 
-# DartIntegration needs plugins
+# DartIntegration needs plugins. TODO: AssimpImporter uses a growable deleter,
+# which, when the plugin is dynamic but all libraries static, is not correctly
+# whitelisted by AbstractImporter checks (because the Trade lib has a different
+# copy of it) and thus it asserts. The assert is right (because the deleter
+# would get dangling after plugin unload), but I don't know what's the right
+# way to fix that yet. Until I know, plugins are built as static as well.
 if [ "$WITH_DART" == "ON" ]; then
     # Magnum Plugins
     git clone --depth 1 git://github.com/mosra/magnum-plugins.git
@@ -68,6 +73,7 @@ if [ "$WITH_DART" == "ON" ]; then
         -DCMAKE_BUILD_TYPE=$CONFIGURATION \
         -DWITH_ASSIMPIMPORTER=$WITH_DART \
         -DWITH_STBIMAGEIMPORTER=$WITH_DART \
+        -DBUILD_PLUGINS_STATIC=$BUILD_STATIC \
         -G Ninja
     ninja install
     cd ../..
