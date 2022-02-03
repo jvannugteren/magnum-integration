@@ -3,7 +3,7 @@ set -ev
 
 git submodule update --init
 
-git clone --depth 1 git://github.com/mosra/corrade.git
+git clone --depth 1 https://github.com/mosra/corrade.git
 cd corrade
 
 # Build native corrade-rc
@@ -62,7 +62,7 @@ ninja install
 cd ../..
 
 # Crosscompile Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git
+git clone --depth 1 https://github.com/mosra/magnum.git
 cd magnum
 mkdir build-emscripten && cd build-emscripten
 cmake .. \
@@ -78,6 +78,7 @@ cmake .. \
     -DWITH_MESHTOOLS=OFF \
     -DWITH_PRIMITIVES=OFF \
     -DWITH_SCENEGRAPH=ON \
+    -DWITH_SCENETOOLS=OFF \
     -DWITH_SHADERS=ON \
     -DWITH_TEXT=OFF \
     -DWITH_TEXTURETOOLS=OFF \
