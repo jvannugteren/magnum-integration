@@ -24,7 +24,7 @@ cmake --build . --target install || exit /b
 cd .. && cd ..
 
 rem Build Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git || exit /b
+git clone --depth 1 https://github.com/mosra/corrade.git || exit /b
 cd corrade || exit /b
 mkdir build && cd build || exit /b
 cmake .. ^
@@ -39,7 +39,7 @@ cmake --build . --target install || exit /b
 cd .. && cd ..
 
 rem Build Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git || exit /b
+git clone --depth 1 https://github.com/mosra/magnum.git || exit /b
 cd magnum || exit /b
 mkdir build && cd build || exit /b
 cmake .. ^
@@ -48,10 +48,11 @@ cmake .. ^
     -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/deps ^
     -DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%/SDL ^
     -DWITH_AUDIO=OFF ^
-    -DWITH_DEBUGTOOLS=OFF ^
-    -DWITH_MESHTOOLS=OFF ^
-    -DWITH_PRIMITIVES=OFF ^
+    -DWITH_DEBUGTOOLS=ON ^
+    -DWITH_MESHTOOLS=ON ^
+    -DWITH_PRIMITIVES=ON ^
     -DWITH_SCENEGRAPH=ON ^
+    -DWITH_SCENETOOLS=OFF ^
     -DWITH_SHADERS=ON ^
     -DWITH_SHADERTOOLS=OFF ^
     -DWITH_TEXT=OFF ^

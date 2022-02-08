@@ -4,7 +4,7 @@ set -ev
 git submodule update --init
 
 # Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git
+git clone --depth 1 https://github.com/mosra/corrade.git
 cd corrade
 
 # Build native corrade-rc
@@ -37,7 +37,7 @@ set -o pipefail && cmake --build . --config Release --target install | xcpretty
 cd ../..
 
 # Crosscompile Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git
+git clone --depth 1 https://github.com/mosra/magnum.git
 cd magnum
 mkdir build-ios && cd build-ios
 cmake .. \
@@ -48,10 +48,11 @@ cmake .. \
     -DCMAKE_INSTALL_PREFIX=$HOME/deps \
     -DCMAKE_PREFIX_PATH=$TRAVIS_BUILD_DIR/sdl2 \
     -DWITH_AUDIO=OFF \
-    -DWITH_DEBUGTOOLS=OFF \
-    -DWITH_MESHTOOLS=OFF \
-    -DWITH_PRIMITIVES=OFF \
+    -DWITH_DEBUGTOOLS=ON \
+    -DWITH_MESHTOOLS=ON \
+    -DWITH_PRIMITIVES=ON \
     -DWITH_SCENEGRAPH=OFF \
+    -DWITH_SCENETOOLS=OFF \
     -DWITH_SHADERS=ON \
     -DWITH_SHADERTOOLS=OFF \
     -DWITH_TEXT=OFF \

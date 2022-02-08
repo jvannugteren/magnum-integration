@@ -2,7 +2,7 @@
 set -ev
 
 # Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git
+git clone --depth 1 https://github.com/mosra/corrade.git
 cd corrade
 mkdir build && cd build
 cmake .. \
@@ -16,7 +16,7 @@ ninja install
 cd ../..
 
 # Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git
+git clone --depth 1 https://github.com/mosra/magnum.git
 cd magnum
 mkdir build && cd build
 cmake .. \
@@ -28,19 +28,35 @@ cmake .. \
     -DTARGET_GLES=ON \
     -DTARGET_GLES2=$TARGET_GLES2 \
     -DWITH_AUDIO=OFF \
-    -DWITH_DEBUGTOOLS=OFF \
-    -DWITH_MESHTOOLS=OFF \
-    -DWITH_PRIMITIVES=OFF \
+    -DWITH_DEBUGTOOLS=ON \
+    -DWITH_MESHTOOLS=ON \
+    -DWITH_PRIMITIVES=ON \
     -DWITH_SCENEGRAPH=ON \
+    -DWITH_SCENETOOLS=OFF \
     -DWITH_SHADERS=ON \
     -DWITH_SHADERTOOLS=OFF \
     -DWITH_TEXT=OFF \
     -DWITH_TEXTURETOOLS=OFF \
     -DWITH_OPENGLTESTER=ON \
-    -DWITH_ANYIMAGEIMPORTER=OFF \
+    -DWITH_ANYIMAGEIMPORTER=ON \
     -DWITH_SDL2APPLICATION=ON \
     -DWITH_WINDOWLESS${PLATFORM_GL_API}APPLICATION=ON \
     -DWITH_SDL2APPLICATION=ON \
+    -G Ninja
+ninja install
+cd ../..
+
+# Magnum Plugins
+# Required by ImGuiIntegration tests
+git clone --depth 1 https://github.com/mosra/magnum-plugins.git
+cd magnum-plugins
+mkdir build && cd build
+cmake .. \
+    -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS" \
+    -DCMAKE_INSTALL_PREFIX=$HOME/deps \
+    -DCMAKE_INSTALL_RPATH=$HOME/deps/lib \
+    -DCMAKE_BUILD_TYPE=$CONFIGURATION \
+    -DWITH_STBIMAGEIMPORTER=ON \
     -G Ninja
 ninja install
 cd ../..

@@ -2,7 +2,7 @@
 set -ev
 
 # Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git
+git clone --depth 1 https://github.com/mosra/corrade.git
 cd corrade
 
 # Build native corrade-rc
@@ -36,7 +36,7 @@ ninja install
 cd ../..
 
 # Crosscompile Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git
+git clone --depth 1 https://github.com/mosra/magnum.git
 cd magnum
 mkdir build-android-arm && cd build-android-arm
 cmake .. \
@@ -52,10 +52,11 @@ cmake .. \
     -DCMAKE_FIND_ROOT_PATH=$HOME/deps \
     -DWITH_AUDIO=OFF \
     -DWITH_ANDROIDAPPLICATION=ON \
-    -DWITH_DEBUGTOOLS=OFF \
-    -DWITH_MESHTOOLS=OFF \
-    -DWITH_PRIMITIVES=OFF \
+    -DWITH_DEBUGTOOLS=ON \
+    -DWITH_MESHTOOLS=ON \
+    -DWITH_PRIMITIVES=ON \
     -DWITH_SCENEGRAPH=OFF \
+    -DWITH_SCENETOOLS=OFF \
     -DWITH_SHADERS=ON \
     -DWITH_SHADERTOOLS=OFF \
     -DWITH_TEXT=OFF \

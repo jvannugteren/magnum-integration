@@ -2,7 +2,7 @@
 set -ev
 
 # Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git
+git clone --depth 1 https://github.com/mosra/corrade.git
 cd corrade
 mkdir build && cd build
 cmake .. \
@@ -17,7 +17,7 @@ ninja install
 cd ../..
 
 # Magnum
-git clone --depth 1 git://github.com/mosra/magnum.git
+git clone --depth 1 https://github.com/mosra/magnum.git
 cd magnum
 mkdir build && cd build
 cmake .. \
@@ -27,10 +27,11 @@ cmake .. \
     -DCMAKE_INSTALL_RPATH=$HOME/deps/lib \
     -DCMAKE_BUILD_TYPE=$CONFIGURATION \
     -DWITH_AUDIO=OFF \
-    -DWITH_DEBUGTOOLS=OFF \
-    -DWITH_MESHTOOLS=$WITH_DART \
-    -DWITH_PRIMITIVES=$WITH_DART \
+    -DWITH_DEBUGTOOLS=ON \
+    -DWITH_MESHTOOLS=ON \
+    -DWITH_PRIMITIVES=ON \
     -DWITH_SCENEGRAPH=ON \
+    -DWITH_SCENETOOLS=OFF \
     -DWITH_SHADERS=ON \
     -DWITH_SHADERTOOLS=OFF \
     -DWITH_TEXT=OFF \
@@ -48,7 +49,7 @@ cd ../..
 # DartIntegration needs plugins
 if [ "$WITH_DART" == "ON" ]; then
     # Magnum Plugins
-    git clone --depth 1 git://github.com/mosra/magnum-plugins.git
+    git clone --depth 1 https://github.com/mosra/magnum-plugins.git
     cd magnum-plugins
     mkdir build && cd build
     cmake .. \
